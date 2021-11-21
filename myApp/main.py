@@ -66,7 +66,14 @@ def update_book(book_id):
     db.session.commit()    
     return "Book was updated successfully"
 
+# DELETE    - GET
+@app.route("/book/delete/<int:book_id>", methods=['GET'])
+def delete_book(book_id):
+    book2 = book_db.query.get(book_id)   #from database book details
 
+    db.session.delete(book2)
+    db.session.commit()    
+    return "Book was deleted successfully"
 
 
 
