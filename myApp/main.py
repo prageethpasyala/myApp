@@ -32,7 +32,7 @@ def books():
 
     html_response = "<ul>"
     for m in booklist:
-        html_response += "<li>" + "<a href='/book/" + str(m.id) + "'>  " + str(m.id) + " - " + m.name + " - " + m.release_date +"</a>" + "</li>"
+        html_response += "<li>" + "<a href='/book/" + str(m.id) + "'>  " + str(m.id) + " - " + m.name + " - " + m.release_date +"</a> --- <a href='book/delete/"+str(m.id)+"'>DEL</a></li>"
     html_response += "</ul>"
     return html_response
 
@@ -40,7 +40,7 @@ def books():
 @app.route("/book/<int:book_id>" , methods=['GET'])
 def get_book(book_id):
     book = book_db.query.get(book_id)   # SELECT * FROM Movies WHERE id = movie_id
-    return "<h1>" + book.name + " - " + book.release_date + " - " + str(book.isdn) + "</h1>"
+    return "<h1>" + book.name + " - " + book.release_date + " - " + str(book.isdn) + "</h1>" 
 
 # CREATE    - POST
 @app.route("/book/add", methods=['POST'])
@@ -73,8 +73,8 @@ def delete_book(book_id):
 
     db.session.delete(book2)
     db.session.commit()    
-    return "Book was deleted successfully"
-
+    return "Book was deleted successfully <a href='/books'>BACK</a>"
+    
 
 
 
